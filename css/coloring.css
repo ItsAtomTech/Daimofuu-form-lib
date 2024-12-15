@@ -1,0 +1,75 @@
+
+:root {
+  --primary_background: white;
+  --primary_background_darker: rgba(220,220,220,1);
+  --primary_color: rgba(40,40,40,1);
+  --primary_color_faded: rgba(40,40,40,0.6);
+  --primary_color_invert: rgba(254,254,255,1);
+  --secondary_color: rgba(0,170,60,1);
+  --secondary_color_darker: rgba(0,113,55,1);
+  --secondary_background: #00bc4f;
+  
+}
+
+
+*::-moz-selection { /* Code for Firefox */
+  color: rgba(230,230,230,1);
+  background: rgba(0,180,50,0.7);
+  border-radius:4px;
+}
+
+*::selection {
+  color: var(--primary_color_invert);
+  background: var(--secondary_color);
+  border-radius:4px;
+}
+
+
+
+
+.primary_color::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--primary_color);
+  opacity: 0.6; /* Firefox */
+}
+
+
+
+.primary_color{
+	color: var(--primary_color)!important;
+	
+}
+
+.primary_color_invert{
+	color: var(--primary_color_invert);
+	
+}
+
+.secondary_color{
+	color:var(--secondary_color);
+	
+}
+
+.outline_only_bg{
+	background:rgba(0,0,0,0.0) ;
+	border:solid rgba(45,45,45,0.5) 1px !important;
+}
+
+.primary_background{
+	background-color:var(--primary_background);
+}
+.primary_background_darker{
+	background-color:var(--primary_background_darker);
+}
+.secondary_background{
+	background-color:var(--secondary_background);
+}
+
+
+.profile_page_con{
+	
+	border-right:var(--secondary_background);
+	
+}
+
+
+

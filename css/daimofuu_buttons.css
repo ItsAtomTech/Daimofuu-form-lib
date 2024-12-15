@@ -1,0 +1,92 @@
+
+
+.df_button{
+	min-width:40px;
+	min-height:40px;
+	cursor:pointer;
+	border:none;
+	outline:none;
+	background-color:none;
+	border-radius:8px;
+	padding:5px;
+	box-shadow:0 3px 0 var(--secondary_color_darker);
+	user-select:none;
+	-webkit-transition:0.05s;
+	transition:0.05s;
+}
+
+.df_button_flat{
+	min-width:40px;
+	min-height:40px;
+	cursor:pointer;
+	border:none;
+	outline:none;
+	background-color:none;
+	border-radius:8px;
+	padding:5px;
+	user-select:none;
+	/* box-shadow:0 5px 0 var(--secondary_color_darker); */
+	-webkit-transition:0.05s;
+	transition:0.05s;
+}
+
+
+.df_button_outline{
+	min-width:40px;
+	min-height:40px;
+	cursor:pointer;
+	border:solid var(--secondary_color) 1px;
+	outline:none;
+	background-color:transparent !important;
+	border-radius:8px;
+	padding:5px;
+	/* box-shadow:0 5px 0 var(--secondary_color_darker); */
+	-webkit-transition:0.05s;
+	transition:0.05s;
+}
+
+
+.df_button:active,.df_button:focus{
+	-webkit-transform:translateY(3px);
+	transform:translateY(3px);
+	box-shadow:0 0 0 rgba(0,0,0,0);
+
+}
+
+.df_button:hover{
+	-webkit-filter:brightness(130%);
+	filter:brightness(130%) contrast(110%);
+	
+}
+
+
+.df_button_flat:active, .df_button_outline:active, .df_button_flat:not(select):focus, .df_button_outline:not(select):focus{
+	-webkit-transform:translateY(3px);
+	transform:translateY(3px);
+	box-shadow:0 0 0 rgba(0,0,0,0);
+	opacity:0.7;
+	/* display:flex; */
+	/* align-items:center; */
+	/* justify-content:center; */
+
+}
+
+.df_small{
+	height:30px;
+	min-height:30px;
+	padding-top:3px;
+	padding-bottom:3px;
+	min-width:20px;
+}
+
+
+.not_round{
+	border-radius:0px;
+	
+	
+}
+
+.no_background{
+	background:rgba(0,0,0,0);
+	
+}
