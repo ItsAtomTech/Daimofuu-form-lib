@@ -17,7 +17,7 @@
 
 ## 🛠️ Installation
 
-The Sample is Provided on the ***index.html,***
+The Sample is Provided on the ***index.html,***
 
 with the following breakdown: 
 
@@ -115,7 +115,7 @@ loadEvents(); //Force Pre-load Events of each form fields, if neccesary
 
 If we are using the form editor interface functions, the html DOM elements for editing are required to be present on your current page, which is provided on the index. If not, the editing interface would simply fail to load, but the form rendering is not affected. So long as the "main container" is present.
 
-Each field types have their own functions and editor interface, such as the Select option, and the Special types like the Table fields editor.
+Each field types have their own functions and editor interface, such as the Select option, and the Special types like the Table fields editor.
 
 You can save the form configuration by turning the "***formDatas***" object into a string. Then put it to your saving methods.
 
