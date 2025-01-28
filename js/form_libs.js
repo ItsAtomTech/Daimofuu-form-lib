@@ -1,13 +1,13 @@
-//Daimofuu form lib by Atomtech since 2023 - 2024
+//Daimofuu form lib by Atomtech since 2023 - 2025
 //
 //Utilities
-let versionDF = [1,0,11,2024];
+let versionDF = [1,0,28,2025];
 function getVersion(){
 	return versionDF.join(".");
 }
 
 
-									//Used for the Intgrated File Uploader
+									//Used for the Integrated File Uploader
 let FILEUPLOAD_SERVER = undefined; //Address to where files are upload
 let FILEGET_SERVER = undefined; //Address to where to get the uploaded resources
 let FILEREMOVE_SERVER = undefined; //Address where the remove file is handled
@@ -1314,6 +1314,9 @@ let formEditor = {
 		formConfig.description = _('df_desc_editor').value;
 		formConfig.group = _('group_selector_').value;
 		
+		
+		formConfig.hidden = _('form_hidden_').checked ? _('form_hidden_').checked: undefined;
+		
 		formDatas.forms[selectedInputIndex] ? formConfig.eventlist = formDatas.forms[selectedInputIndex].eventlist : false;
 		
 		formConfig.row_span  = parseInt(_("row_spanning_").value);
@@ -1351,6 +1354,7 @@ let formEditor = {
 		_("form_value_").value = "";
 		_("form_fancy_").checked = false;
 		_("form_required_").checked = false;
+		_("form_hidden_").checked = false;
 		_('df_desc_editor').value = "";
 		loadGroupList(data.group);
 		
@@ -1390,6 +1394,11 @@ let formEditor = {
 		};
 		if(data.required == true){
 			_("form_required_").checked = data.required;
+			
+		};
+		
+		if(data.hidden == true){
+			_("form_hidden_").checked = data.hidden;
 			
 		};
 		
@@ -1551,11 +1560,13 @@ function processEventAssigned(name,values){
 		if(inps.type == "header"){
 			continue;
 		}
-	
+		
+		
 		if(inps.events == undefined){
 			continue;
 		}
-
+		
+		
 		if(inps.events.eventname == name){
 			
 			
@@ -1616,9 +1627,30 @@ function processEventAssigned(name,values){
 	
 }
 
+
+function hiddenConfigForms(s){
+	let all_hidden = _("main_form_container").getElementsByClassName("hidden_form");
+	
+	if(all_hidden.length <= 0){
+		return false;
+	}
+	
+	for(each of all_hidden){
+		if(s){
+			each.classList.add("hidden_shown");
+		}else{
+			each.classList.remove("hidden_shown");
+		}
+	}
+	
+	return true;
+}
+
+
 function hiddenForms(show=false){
 	showHiddenForms = show;
 	loadListedEvents();
+	hiddenConfigForms(show);
 }
 
 
@@ -2436,7 +2468,14 @@ isFormArrangeMove = isMoving;
 			}
 		}
 		
-
+		if(each.hidden){
+			_(each.id).setAttribute('event_hidden','true');
+			myForm.classList.add("hidden_form");
+			if(showHiddenForms){ //show hidden fields for none event reload
+				myForm.classList.add("hidden_shown");
+			}
+		}
+		
 		
 		extCount++;
 	}	

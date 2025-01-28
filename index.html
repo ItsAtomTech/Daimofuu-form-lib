@@ -163,10 +163,14 @@ padding:0px;
 			
 			<div class="attributes_group"> 
 				
-				<div class="cols_con_" group='value'>
-					<label for="form_value_" class="placeholder_label"> Value: (Optional)  </label><input type="text" id='form_value_' value="" class="fancy_form_df" />
+				<div class="cols_con_ flexed flexed_wrap" group='value'>
+					<label for="form_value_" class="placeholder_label"> Value: (Optional)  </label><input type="text" id='form_value_' value="" class="fancy_form_df full_flexed" />
 					<div class="cols_con_" group='required'>
 						<label for="form_required_" class="small"> Required: </label> <input type="checkbox" id="form_required_">
+					</div>
+					
+					<div class="cols_con_" group='is_hidden'>
+						<label for="form_hidden_" class="small" tooltip="Should this form be hidden from the editor."> Hidden: </label> <input type="checkbox" id="form_hidden_">
 					</div>
 					
 		
@@ -963,6 +967,7 @@ formDatas = {
             "id": "text_1",
             "index": 0,
 			"onchange": "hello()",
+			"hidden": true,
         },
     ],
 	
@@ -986,7 +991,6 @@ function hello(){
 
 
 groupEditor.loadList(); //Just for pre loading
-<!-- showGroupEditor(); -->
 <!-- showEditor(); -->
 </script>
 
