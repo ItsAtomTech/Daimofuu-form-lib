@@ -1630,7 +1630,7 @@ function processEventAssigned(name,values){
 			
 			//Disabling
 			}else if(inps.events.type == "enableon"){
-				if (conditionFullfiled) {
+				if (!conditionFullfiled) {
 					inputElement.classList.add("disabled_form_input");
 					_(inps.id).setAttribute('event_hidden','true');
 				} else {
