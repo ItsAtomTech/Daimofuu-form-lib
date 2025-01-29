@@ -77,6 +77,10 @@ padding:0px;
 	<div class="floating_side_options primary_background" id="side_options">  
 		  <button onclick="showGroupEditor()" class="df_button_flat primary_color primary_background" tooltip="Open group editor"> 
 		  |<b>[<span class='fa fa-square'>  </span>]</b>
+		  </button>		  
+		  
+		  <button onclick="hiddenForms(!showHiddenForms, this)" class="df_button_flat primary_color primary_background normal" tooltip="Show/Hide hidden form fields"> 
+		  <b>|<span class='fa fa-eye'>  </span></b>
 		  </button>
 	</div>
 	
@@ -469,6 +473,21 @@ padding:0px;
 						
 			</div>	
 			
+		</div>
+
+		<div class="row_dev_con flexed">
+			<div class="cols_con_ full_width" tooltip="Fill in with the value you want to Observed by this input">
+				<label for="event_condition_select_" class="placeholder_label infocus"> Condition </label>										
+					<select id="event_condition_select_" value class="fancy_form_df small" >
+						<option disabled class="small">-- Select a Condition --</option>
+						<option value="=" selected>Equal (Default)</option>
+						<option value=">=">>= Greater or Equal</option>
+						<option value="<=">&lt;= Less or Equal </option>
+						<option value=">"> > Greater </option>
+						<option value="<"> &lt; Less </option>
+					</select>	
+						
+			</div>	
 		</div>
 
 						
@@ -960,6 +979,28 @@ formDatas = {
             "id": "label_text_1",
             "index": 1
         },
+		
+		{
+			"type": "select",
+			"value": "",
+			    "eventlist": [
+        "ev_06717c68-2b62-46ed-a21b-8e0e479909fe"
+    ],
+			"items": [
+				"1",
+				"2",
+				"3"
+			],
+			"label": "Sample Select",
+			"fancy": true,
+			"required": false,
+			"description": "",
+			"group": "none",
+			"row_span": 0,
+			"col_span": 0,
+			"span_column": false,
+			"id": "select_id",
+        },	
 		{
             "type": "text",
             "value": "",
@@ -967,8 +1008,14 @@ formDatas = {
             "id": "text_1",
             "index": 0,
 			"onchange": "hello()",
-			"hidden": true,
-        },
+			"hidden": false,
+			    "events": {
+					"eventname": "ev_06717c68-2b62-46ed-a21b-8e0e479909fe",
+					"type": "hideon",
+					"targetIndex": "2",
+					"value": "2",
+			},
+        },	
     ],
 	
 
@@ -992,6 +1039,8 @@ function hello(){
 
 groupEditor.loadList(); //Just for pre loading
 <!-- showEditor(); -->
+
+
 </script>
 
 

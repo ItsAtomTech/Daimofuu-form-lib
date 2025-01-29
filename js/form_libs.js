@@ -1569,8 +1569,35 @@ function processEventAssigned(name,values){
 		
 		if(inps.events.eventname == name){
 			
-			
 			let inputElement = _(inps.id).parentNode.parentNode;
+			let conditionFullfiled = false;
+			
+			if(inps.events.condition == undefined || inps.events.condition == "="){
+				if(inps.events.value == values){
+					conditionFullfiled = true;
+				}
+			}else if(inps.events.condition == ">="){
+				if(values >= inps.events.value){
+					conditionFullfiled = true;
+				}
+			}else if(inps.events.condition == ">"){
+				if(values > inps.events.value){
+					conditionFullfiled = true;
+				}
+			}else if(inps.events.condition == "<="){
+				if(values <= inps.events.value){
+					conditionFullfiled = true;
+				}
+			}else if(inps.events.condition == "<"){
+				if(values < inps.events.value){
+					conditionFullfiled = true;
+				}
+			}else{
+				if(inps.events.value == values){
+					conditionFullfiled = true;
+				}
+			}
+			
 			
 			
 			if(showHiddenForms){
@@ -1584,7 +1611,7 @@ function processEventAssigned(name,values){
 			
 			//Hiding
 			if (inps.events.type == "showon") {
-				if (inps.events.value == values) {
+				if (conditionFullfiled) {
 					inputElement.style.removeProperty("display");
 					_(inps.id).setAttribute('event_hidden','false');
 					
@@ -1593,7 +1620,7 @@ function processEventAssigned(name,values){
 					_(inps.id).setAttribute('event_hidden','true');
 				}
 			} else if (inps.events.type == "hideon") {
-				if (inps.events.value == values) {
+				if (conditionFullfiled) {
 					inputElement.style.display = "none";
 					_(inps.id).setAttribute('event_hidden','true');
 				} else {
@@ -1603,7 +1630,7 @@ function processEventAssigned(name,values){
 			
 			//Disabling
 			}else if(inps.events.type == "enableon"){
-				if (inps.events.value != values) {
+				if (conditionFullfiled) {
 					inputElement.classList.add("disabled_form_input");
 					_(inps.id).setAttribute('event_hidden','true');
 				} else {
@@ -1611,7 +1638,7 @@ function processEventAssigned(name,values){
 					_(inps.id).setAttribute('event_hidden','false');
 				}
 			}else if(inps.events.type == "disableon"){
-				if (inps.events.value == values) {
+				if (conditionFullfiled) {
 					inputElement.classList.add("disabled_form_input");
 					_(inps.id).setAttribute('event_hidden','true');
 				} else {
@@ -4146,6 +4173,7 @@ let eventEditor = {
 	events: {},
 	saved: undefined,
 	listenerFunction: undefined,
+	condition: "=",
 	
 	eventTemplate: {
 		'eventname': '',//uuid
@@ -4163,6 +4191,7 @@ let eventEditor = {
 		let valueSelector = _("event_value_select_");
 			valueSelector.innerHTML = "";
 		let valueRaw = _("event_value_raw_");
+		let condition = _("event_condition_select_") ? _("event_condition_select_"): undefined;
 		
 		inputlistCon.value = this.events.targetIndex;
 		inputActions.value = this.events.type;
@@ -4173,6 +4202,11 @@ let eventEditor = {
 			}			
 		}catch(e){
 			//--
+		}
+
+		if(condition != undefined){
+			condition.value = this.events.condition;
+			
 		}
 
 		valueRaw.value = this.events.value||"";
@@ -4190,6 +4224,7 @@ let eventEditor = {
 	showEditor: function(){
 		this.loadList();
 		_("form_event_editor_modal").classList.remove('hidden');
+		addFancyPlaceholder(); //should have optional array of elements soon for performance improvemnt.
 		
 	},
 	
@@ -4224,6 +4259,7 @@ let eventEditor = {
 		let inputActions = _("event_input_type_");
 		let valueSelector = _("event_value_select_");
 		let valueRaw = _("event_value_raw_");
+		let condition = _("event_condition_select_") ? _("event_condition_select_") : undefined;
 		
 		this.events.targetIndex = inputlistCon.value;
 		this.events.type = inputActions.value;
@@ -4234,7 +4270,13 @@ let eventEditor = {
 			this.events.value = valueRaw.value;
 		}
 		
-		this.saved =  cloneSafe(this.events);
+		if(condition != undefined && condition.value != " "){
+			this.events.condition = condition.value;
+		}else{
+			this.events.condition = "=";
+		}
+		
+		this.saved = cloneSafe(this.events);
 		try{
 			if(this.listenerFunction){
 				this.listenerFunction();
