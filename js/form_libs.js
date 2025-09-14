@@ -1,7 +1,7 @@
 //Daimofuu form lib by Atomtech since 2023 - 2025
 //
 //Utilities
-let versionDF = [1,0,28,2025];
+let versionDF = [1,8,14,2025];
 function getVersion(){
 	return versionDF.join(".");
 }
@@ -135,6 +135,10 @@ const formMaker = {
 		}else if(type == "number"){
 			formInput = make("input");
 			formInput.type = "number";		
+			
+		}else if(type == "password"){
+			formInput = make("input");
+			formInput.type = "password";		
 			
 		}else if(type == "range" || type == "slider"){
 			formInput = make("input");
@@ -620,7 +624,7 @@ const formMaker = {
 		
 		
 		switch (inputType){
-			case "text" || "textarea":
+			case "text" || "textarea" || "password":
 				if(form['required']){
 					if(removeWhitespace(values).length <= 0){
 						
@@ -1167,6 +1171,9 @@ let formEditor = {
 			break;	
 			case "number":				
 				visibleForms = ['value', 'min', 'max','required'];
+			break;		
+			case "password":				
+				visibleForms = ['value','required'];
 			break;	
 			case "range":				
 				visibleForms = ['value', 'min', 'max', 'steps','required'];					
@@ -1224,6 +1231,12 @@ let formEditor = {
 	//Only get and set the needed values and attributes per form type	
 		switch(formType){
 			case "text":
+				
+				formConfig.value = _('form_value_').value;
+				
+		
+			break;	
+			case "password":
 				
 				formConfig.value = _('form_value_').value;
 				
