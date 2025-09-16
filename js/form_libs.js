@@ -286,7 +286,10 @@ const formMaker = {
 					
 					//loop all chech_items
 					let ext_id = 0;
-					for(each of attributes.config.items){
+					
+					let dataLists = attributes.config.items;
+					
+					for(each of dataLists){
 						let checkItem = make('div');
 							
 							
@@ -299,6 +302,17 @@ const formMaker = {
 							
 						let opt = make("input");
 						opt.value = each;	
+						
+						try{
+							if(typeof(each) == "object"){
+								opt.value = each[0];
+							}
+						}catch(e){
+							//--
+						}
+						
+						
+						
 						opt.type = 'checkbox';
 						
 
@@ -318,7 +332,18 @@ const formMaker = {
 						
 						let lab = make("label");
 						lab.setAttribute('for',"_"+attributes.id+'_'+ext_id);
+						
 						lab.innerHTML = each;
+						
+						//assign a value if object is passed as items intead of a string
+						try{
+							if(typeof(each) == "object"){
+								lab.innerHTML = each[1];
+							}
+						}catch(e){
+							//--
+						}
+						
 						
 						if(attributes.config.config.column_view){
 							lab.classList.add("custom_check_button","small");
@@ -2003,7 +2028,11 @@ function checkGroupsUpdate(checkElms, inputid){
 			if(item.type == "text"){
 				GetValues.push(item.value);
 			}else{
-				GetValues.push(item.labels[0].innerText);
+				if(item.value != item.labels[0].innerText){
+					GetValues.push(item.value);
+				}else{
+					GetValues.push(item.labels[0].innerText);
+				}
 			};
 		}
 		exID++;
